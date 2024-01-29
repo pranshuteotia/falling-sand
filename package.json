@@ -1,0 +1,17 @@
+{
+  "name": "falling-sand",
+  "version": "1.0.0",
+  "description": "A falling sand simulator",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "echo OK!"
+  },
+  "author": "Pranshu Teotia",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  }
+}
