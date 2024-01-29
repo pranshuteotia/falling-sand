@@ -44,10 +44,8 @@ function main() {
   async function drawSand(event: MouseEventInit) {
     mousedown = true;
 
-    if (!mousePosition.x || !mousePosition.y) {
-      mousePosition.x = event.clientX as number;
-      mousePosition.y = event.clientY as number;
-    }
+    mousePosition.x = event.clientX as number;
+    mousePosition.y = event.clientY as number;
 
     while (mousedown) {
       await new Promise((r) => setTimeout(r, 1000 / 60));

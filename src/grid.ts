@@ -25,7 +25,7 @@ export class Grid {
   }
 
   set(x: number, y: number, color: string) {
-    if (x >= this.height || x < 0 || y >= this.width || y < 0) return;
+    if (x >= this.width || x < 0 || y >= this.height || y < 0) return;
 
     this.grid[y * this.width + x] = color;
   }
