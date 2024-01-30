@@ -1,4 +1,5 @@
-import { Grid } from './grid';
+import { Grid } from 'src/grid';
+import { Sand } from 'src/sand';
 
 interface MousePosition {
   x: number | null;
@@ -33,7 +34,6 @@ function main() {
   }
 
   // EVENT LISTENERS
-
   canvas.addEventListener('pointerdown', drawSand);
   canvas.addEventListener('pointerup', () => (mousedown = false));
   canvas.addEventListener('pointerout', () => (mousedown = false));
@@ -53,17 +53,11 @@ function main() {
 
       const x = Math.floor((mousePosition.x - 5) / GRID_CELL_DIMENSION);
       const y = Math.floor((mousePosition.y - 5) / GRID_CELL_DIMENSION);
-      grid.setCircle(x, y, getRandomColor, 2, 0.5);
+      grid.setCircle(x, y, () => new Sand(), 2, 0.5);
     }
   }
 
   animate();
-}
-
-function getRandomColor() {
-  const colors = ['#eaba6b', '#ead2ac', '#f7e8a4'];
-
-  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 main();
