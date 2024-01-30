@@ -14,6 +14,7 @@ export class Grid {
   private grid: Particle[];
   private pixelDimension: number;
   private canvasContext: CanvasRenderingContext2D;
+  private rowCount: number;
 
   constructor(props: GridProps) {
     this.width = Math.floor(props.canvasWidth / props.gridCellDimension);
@@ -21,6 +22,7 @@ export class Grid {
     this.canvasContext = props.context;
     this.pixelDimension = props.gridCellDimension;
     this.grid = new Array<Particle>(this.height * this.width).fill(new Empty());
+    this.rowCount = Math.floor(this.grid.length / this.width);
   }
 
   clear() {
@@ -84,8 +86,17 @@ export class Grid {
       this.canvasContext.restore();
     }
 
-    for (let i = this.grid.length - this.width - 1; i > 0; --i) {
-      this.update(i);
+    this.update();
+  }
+
+  private update() {
+    for (let row = this.rowCount - 1; row >= 0; --row) {
+      const rowOffset = row * this.width;
+      const leftToRight = Math.random() > 0.5;
+      for (let i = 0; i < this.width; ++i) {
+        const columnOffset = leftToRight ? i : -i - 1 + this.width;
+        this.updateParticle(rowOffset + columnOffset);
+      }
     }
   }
 
@@ -96,7 +107,7 @@ export class Grid {
     };
   }
 
-  private update(index: number) {
+  private updateParticle(index: number) {
     const below = index + this.width;
     const belowLeft = below - 1;
     const belowRight = below + 1;
