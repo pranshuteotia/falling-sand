@@ -11,6 +11,9 @@ export class Grid {
   private grid: string[];
   private pixelDimension: number;
   private canvasContext: CanvasRenderingContext2D;
+  private maxSpeed = 8;
+  private acceleration = 0;
+  private velocity = 0;
 
   constructor(props: GridProps) {
     this.width = Math.floor(props.canvasWidth / props.gridCellDimension);
@@ -103,5 +106,19 @@ export class Grid {
     } else if (this.isEmpty(belowRight)) {
       this.swap(index, belowRight);
     }
+  }
+
+  private updateVelocity() {
+    let newVelocity = this.velocity + this.acceleration;
+
+    if (Math.abs(newVelocity) > this.maxSpeed) {
+      newVelocity = Math.sign(newVelocity) * this.maxSpeed;
+    }
+
+    this.velocity = newVelocity;
+  }
+
+  private resetVelocity() {
+    this.velocity = 0;
   }
 }

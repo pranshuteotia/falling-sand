@@ -37,11 +37,12 @@ function main() {
   canvas.addEventListener('pointerdown', drawSand);
   canvas.addEventListener('pointerup', () => (mousedown = false));
   canvas.addEventListener('pointerout', () => (mousedown = false));
-  canvas.addEventListener('pointermove', (event: MouseEventInit) => {
+  canvas.addEventListener('pointermove', (event: MouseEvent) => {
     mousePosition = { x: event.clientX as number, y: event.clientY as number };
   });
 
-  async function drawSand(event: MouseEventInit) {
+  async function drawSand(event: MouseEvent) {
+    event.preventDefault();
     mousedown = true;
 
     mousePosition.x = event.clientX as number;
@@ -52,11 +53,17 @@ function main() {
 
       const x = Math.floor((mousePosition.x - 5) / GRID_CELL_DIMENSION);
       const y = Math.floor((mousePosition.y - 5) / GRID_CELL_DIMENSION);
-      grid.setCircle(x, y, () => 'red', 2, 0.5);
+      grid.setCircle(x, y, getRandomColor, 2, 0.5);
     }
   }
 
   animate();
+}
+
+function getRandomColor() {
+  const colors = ['#eaba6b', '#ead2ac', '#f7e8a4'];
+
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 main();
