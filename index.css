@@ -23,3 +23,23 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+#controls {
+  padding: 1rem;
+  background-color: #345830;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  top: 10px;
+  border: 1px solid black;
+  gap: 0.5rem;
+  border-radius: 5px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #94ecbe;
+  font-weight: bold;
+  border: 1px solid #000;
+}
